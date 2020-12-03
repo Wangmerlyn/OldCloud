@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_graph"
+    app:startDestination="@id/fragmentLogin">
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.xjtu.oldcloud.FragmentLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentLogin_to_lobby"
+            app:destination="@id/lobby" />
+    </fragment>
+    <fragment
+        android:id="@+id/lobby"
+        android:name="com.xjtu.oldcloud.Lobby"
+        android:label="fragment_lobby"
+        tools:layout="@layout/fragment_lobby" >
+        <action
+            android:id="@+id/action_lobby_to_codePage"
+            app:destination="@id/codePage" />
+        <action
+            android:id="@+id/action_lobby_to_scanPage"
+            app:destination="@id/scanPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/codePage"
+        android:name="com.xjtu.oldcloud.CodePage"
+        android:label="fragment_code_page"
+        tools:layout="@layout/fragment_code_page" />
+    <fragment
+        android:id="@+id/scanPage"
+        android:name="com.xjtu.oldcloud.ScanPage"
+        android:label="fragment_scan_page"
+        tools:layout="@layout/fragment_scan_page" />
+</navigation>

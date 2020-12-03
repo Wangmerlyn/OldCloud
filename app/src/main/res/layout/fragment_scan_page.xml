@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ScanPage" >
+<TextView
+    android:id="@+id/textView_Code"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="This is the Code"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/activity_vertical_margin"/>
+    <ImageView
+        android:id="@+id/imageView_Result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"/>
+
+    <Button
+        android:id="@+id/button_Scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+</LinearLayout>
