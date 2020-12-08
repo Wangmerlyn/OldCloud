@@ -2,4 +2,11 @@
     <string name="app_name">OldCloud</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_code_page_Button">Refresh</string>
+    <string name="str_login_TextView_title">Plz login</string>
+    <string name="str_login_EditText_Name">Name</string>
+    <string name="str_login_Button">Button</string>
+    <string name="str_scan_page_TextView_title">This is the Code</string>
+    <string name="str_scan_page_Button_scan">Scan</string>
+    <string name="str_scan_page_Button_Button">Button</string>
 </resources>
