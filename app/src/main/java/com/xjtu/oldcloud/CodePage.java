@@ -94,7 +94,7 @@ public class CodePage extends Fragment {
             Bitmap code=null;
             String Prefix = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             try {
-                code = CodeCreator.createQRCode(Prefix+myViewModel.UserName+"\\"+myViewModel.UserPassword,400,400,null);
+                code = CodeCreator.createQRCode(Prefix+myViewModel.UserName+"+"+myViewModel.UserPassword,400,400,null);
             } catch (WriterException e) {
                 e.printStackTrace();
                 Log.println(Log.DEBUG,"DEBUG","SHIT HAPPENDS");

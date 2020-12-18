@@ -8,5 +8,5 @@
     <string name="str_login_Button">Button</string>
     <string name="str_scan_page_TextView_title">This is the Code</string>
     <string name="str_scan_page_Button_scan">Scan</string>
-    <string name="str_scan_page_Button_Button">Button</string>
+    <string name="str_scan_page_Button_LoginShit">Try Login</string>
 </resources>

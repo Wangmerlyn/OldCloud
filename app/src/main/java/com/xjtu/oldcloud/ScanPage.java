@@ -24,6 +24,11 @@ import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.bean.ZxingConfig;
 import com.yzq.zxinglibrary.common.Constant;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ScanPage#newInstance} factory method to
@@ -41,9 +46,10 @@ public class ScanPage extends Fragment {
     private String mParam1;
     private String mParam2;
     ImageView imageView_Result;
-    Button button_Scan;
+    Button button_Scan,button_LoginShit;
     TextView textView_Code;
     Button button;
+    MyViewModel myViewModel;
     public ScanPage() {
         // Required empty public constructor
     }
@@ -85,17 +91,15 @@ public class ScanPage extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+        //myViewModel = ViewModelProviders.of(this).get(key,MyViewModel.class);
         button_Scan = getActivity().findViewById(R.id.button_Scan);
         imageView_Result = getActivity().findViewById(R.id.imageView_Result);
         textView_Code = getActivity().findViewById(R.id.textView_Code);
         Scan_Code();
 
-        button = getActivity().findViewById(R.id.button);
-        button.setOnClickListener(v->{
-            MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-            textView_Code.setText(myViewModel.Code);
-            Toast.makeText(getContext(),"dadadada",Toast.LENGTH_LONG).show();
-        });
+        button_LoginShit = getActivity().findViewById(R.id.button_LoginShit);
+        TryLogin();
     }
 
     void Scan_Code(){
@@ -121,9 +125,39 @@ public class ScanPage extends Fragment {
         zxingConfig.setShowbottomLayout(true);
         intent.putExtra(Constant.INTENT_ZXING_CONFIG,zxingConfig);
         startActivityForResult(intent,REQUEST_SCAN_CODE);
-        MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        //MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         textView_Code.setText(myViewModel.Code);
         //Toast.makeText(getContext(),myViewModel.Code+"THISIS THE SHIT",Toast.LENGTH_LONG).show();
+    }
+
+    void TryLogin(){
+        button_LoginShit.setOnClickListener(v->{
+            //MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            Date date=null;
+            Toast.makeText(getContext(),myViewModel.Code,Toast.LENGTH_LONG).show();
+            try {
+                date = simpleDateFormat.parse(myViewModel.Code.substring(0,15));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if(date!=null){
+                Date date_now = new Date();
+                if(Math.abs(date_now.getTime()-date.getTime())>=15){
+                    int index = myViewModel.Code.indexOf('+');
+                    myViewModel.ScannedName = myViewModel.Code.substring(15,index);
+                    myViewModel.ScannedPassword=myViewModel.Code.substring(index+1);
+                    Toast.makeText(getContext(),myViewModel.ScannedName,Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getContext(),"Code Overdue!!!",Toast.LENGTH_LONG).show();
+                }
+            }
+            else{
+                Toast.makeText(getContext(),"Scan Code Failed!!!",Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
     @Override
@@ -132,7 +166,7 @@ public class ScanPage extends Fragment {
         if(requestCode==100){
             if(data!=null){
                 String code = data.getStringExtra(Constant.CODED_CONTENT);
-                MyViewModel myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+                //MyViewModel myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
                 myViewModel.Code=code;
                 Log.println(Log.DEBUG,"ME","sdadasda");
                 Log.e("Debug","OKKKKK");
