@@ -8,4 +8,5 @@ public class MyViewModel extends ViewModel {
     String Code;
     String ScannedName;
     String ScannedPassword;
+    String PhoneNumber;
 }

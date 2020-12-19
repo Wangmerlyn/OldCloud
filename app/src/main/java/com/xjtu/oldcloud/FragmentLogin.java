@@ -34,7 +34,7 @@ public class FragmentLogin extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    EditText editText_PersonName,editText_Password;
+    EditText editText_PersonName,editText_Password,editText_PhoneNumber;
     Button button_Login;
 
     public FragmentLogin() {
@@ -84,6 +84,7 @@ public class FragmentLogin extends Fragment {
         editText_Password = getActivity().findViewById(R.id.editTextTextPassword);
         editText_PersonName=getActivity().findViewById(R.id.editTextTextPersonName);
         button_Login = getActivity().findViewById(R.id.button_Login);
+        editText_PhoneNumber = getActivity().findViewById(R.id.editTextPhone_PhoneNumber);
         Set_Button_Login();
     }
 
@@ -93,6 +94,7 @@ public class FragmentLogin extends Fragment {
                 MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
                 myViewModel.UserName=editText_PersonName.getText().toString();
                 myViewModel.UserPassword=editText_Password.getText().toString();
+                myViewModel.PhoneNumber = editText_PhoneNumber.getText().toString();
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_fragmentLogin_to_lobby);
             }

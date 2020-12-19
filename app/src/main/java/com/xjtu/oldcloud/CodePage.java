@@ -1,14 +1,26 @@
 package com.xjtu.oldcloud;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.provider.ContactsContract;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +51,7 @@ public class CodePage extends Fragment {
     private String mParam1;
     private String mParam2;
     ImageView imageView_Code ;
-    Button button_Refresh;
+    Button button_Refresh,button_CallFam;
     public CodePage() {
         // Required empty public constructor
     }
@@ -79,14 +91,33 @@ public class CodePage extends Fragment {
         return inflater.inflate(R.layout.fragment_code_page, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         imageView_Code = getActivity().findViewById(R.id.imageView_Code);
         button_Refresh = getActivity().findViewById(R.id.button_Refresh);
+        button_CallFam = getActivity().findViewById(R.id.button_CallFam);
+        Call_Family();
         Code_Refresh();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    void Call_Family(){
+        MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        button_CallFam.setOnClickListener(v->{
+            if(getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
+                String[] Permissions = {Manifest.permission.CALL_PHONE};
+                requestPermissions(Permissions,10);
+            }
+            Intent intent=new Intent(Intent.ACTION_CALL);
+            Uri Data = Uri.parse("tel:"+myViewModel.PhoneNumber);
+            intent.setData(Data);
+            startActivity(intent);
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     void Code_Refresh(){
         button_Refresh.setOnClickListener(v -> {
             MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
@@ -101,10 +132,35 @@ public class CodePage extends Fragment {
             }
             if(code!=null){
                 imageView_Code.setImageBitmap(code);
+                Send_Text();
             }
             else{
-                Toast.makeText(getContext(),"SHITCODEMANAAAAA",1).show();
+                Toast.makeText(getContext(),"SHITCODEMANAAAAA",Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    void Send_Text(){
+        MyViewModel myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+
+        if(getActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)!=
+                        PackageManager.PERMISSION_GRANTED  ||  getActivity().checkSelfPermission(Manifest.permission.SEND_SMS)==PackageManager.PERMISSION_DENIED){
+            String[] Permission={Manifest.permission.SEND_SMS,Manifest.permission.ACCESS_FINE_LOCATION};
+
+            requestPermissions(Permission,10);
+            Toast.makeText(getContext(),Integer.toString(Permission.length),Toast.LENGTH_LONG).show();
+        }
+        String serviceString = Context.LOCATION_SERVICE;
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(serviceString);
+        String provider = LocationManager.GPS_PROVIDER;
+        Location location = locationManager.getLastKnownLocation(provider);
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
+        SmsManager smsManager = SmsManager.getDefault();
+        String Content = "所处位置纬度："+Double.toString(lat)+"经度："+Double.toString(lng)+"!!!!";
+        //Toast.makeText(getContext(),myViewModel.PhoneNumber,Toast.LENGTH_LONG).show();
+        smsManager.sendTextMessage(myViewModel.PhoneNumber,null,Content,null,null);
+
     }
 }

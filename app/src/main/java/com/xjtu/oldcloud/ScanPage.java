@@ -143,11 +143,16 @@ public class ScanPage extends Fragment {
             }
             if(date!=null){
                 Date date_now = new Date();
-                if(Math.abs(date_now.getTime()-date.getTime())>=15){
+                if(Math.abs(date_now.getTime()-date.getTime())<=15){
                     int index = myViewModel.Code.indexOf('+');
                     myViewModel.ScannedName = myViewModel.Code.substring(15,index);
                     myViewModel.ScannedPassword=myViewModel.Code.substring(index+1);
                     Toast.makeText(getContext(),myViewModel.ScannedName,Toast.LENGTH_LONG).show();
+
+                    PackageManager packageManager = getActivity().getPackageManager();
+                    Intent intent = packageManager.getLaunchIntentForPackage("com.redfinger.app");
+                    startActivity(intent);
+
                 }
                 else{
                     Toast.makeText(getContext(),"Code Overdue!!!",Toast.LENGTH_LONG).show();
