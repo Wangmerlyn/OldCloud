@@ -10,64 +10,64 @@
     <!-- TODO: Update blank fragment layout --><![CDATA[
     >
 
-    ]]>
 
-    <TextView
-        android:id="@+id/textView_Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/str_login_TextView_title"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp" />
+
+
+
+    ]]>
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_vertical_margin"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/str_login_EditText_Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_Title"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_vertical_margin"
         android:ems="10"
         android:inputType="textPassword"
+        android:text="@string/str_login_page_EditText_Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintVertical_bias="0.351" />
 
     <Button
         android:id="@+id/button_Login"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/str_login_Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView_Title"
-        app:layout_constraintVertical_bias="0.715" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextPhone_PhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_vertical_margin"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/button_Login"
+        android:text="@string/str_login_page_EditText_Phone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintVertical_bias="0.19" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
