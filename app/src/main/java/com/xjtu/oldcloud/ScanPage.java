@@ -94,8 +94,8 @@ public class ScanPage extends Fragment {
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
         //myViewModel = ViewModelProviders.of(this).get(key,MyViewModel.class);
         button_Scan = getActivity().findViewById(R.id.button_Scan);
-        imageView_Result = getActivity().findViewById(R.id.imageView_Result);
-        textView_Code = getActivity().findViewById(R.id.textView_Code);
+        //imageView_Result = getActivity().findViewById(R.id.imageView_Result);
+        //textView_Code = getActivity().findViewById(R.id.textView_Code);
         Scan_Code();
 
         button_LoginShit = getActivity().findViewById(R.id.button_LoginShit);
